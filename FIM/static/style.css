@@ -1,0 +1,300 @@
+
+/************************
+     Header beging
+************************/
+.header{
+ 	background-color: #7E8F7C;
+}
+ #logo{
+	width: 47%;
+	height: 79%;
+ 	margin: 4% 0% 4% 0%;
+}
+ 
+ .search-bar{
+ 	align:right !important;
+ }
+
+/************************
+     Header end
+************************/
+
+
+ /************************
+     index.html begin
+************************/
+
+ .content{
+ 	background-color: yellow;
+ }
+ .latest_blog{
+ 	background-color: blue;
+ }
+ .side_blog{
+ 	background-color: red;
+ 	border: 8px solid blue ; 
+ 	padding: 8px;
+ 	word-wrap: break-word;
+ 	border-radius: 25px;
+ }
+
+.btn-responsive {
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+
+ .home_main_part{
+ 	background-color: green;
+ }
+ .status_pool{
+ 	background-color: grey;
+ 	padding: 5px 0px 0px 0px;
+ }
+.post_status{
+	background-color: grey;
+}
+.post{  		
+ 	background-color: red;
+ 	border:6px solid green;
+ 	border-radius: 22px;
+
+ }
+.column_right_gap{		
+	border-color: white;
+	border-style: solid;
+    border-width: 0px 10px 0px 0px;
+}
+.see_more{
+	background-color: grey;
+	margin:3% 0% 1% 0%;
+}
+
+.post_image img{
+	padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+.post_option_icon {
+	padding: -22px;
+    margin: 0 auto;
+    max-height: 22px;
+    /*max-width: 10px%;*/
+    /*display: block;*/
+}
+.post_comment {
+	padding-bottom: 15px;
+}
+
+
+
+/************************
+     index.html end
+************************/
+
+/************************
+     user.php beging
+************************/
+.user_profile_pic{
+	padding-top: 1.5%;
+}
+
+.user_profile_pic img{
+	padding: 0;
+    display: block;
+    margin: 0 auto;
+    /*max-height: 10%;*/
+    max-width: 100%;
+    border: 5px solid gray;
+    border-radius: 20px;
+
+}
+
+.user_status_div{
+	padding: 1.5% 1% 0px 1%;
+}
+.user_profile_status{
+	border: 33px solid gray;
+}
+
+.user_profile_status th{
+	padding: 33px;
+}
+
+.conten_uper_part{
+	background-color: green;
+}
+
+.content_bottom_part{
+	background-color: red;
+
+}
+/************************
+     user.php beging
+************************/
+
+
+/************************
+     single.php beging
+************************/
+
+.single_page_image img{
+
+}
+.show_time{
+	font-size: 12px;
+	margin-top: -9px
+}
+
+.single_post{  		
+ 	background-color:yellow;
+ 	border:6px solid green;
+ 	border-radius: 22px;
+ 	padding: 15px;
+
+ }
+
+ .single_post_image img{
+ 	padding: 0;
+    display: block;
+    margin: 0 auto;
+    /*max-height: 100%;*/
+    max-width: 100%;
+    /*min-width: 30%;*/
+ }
+
+
+ /*************************
+        begin donate
+ *************************/
+
+.donate_content{
+    background-color: yellow;
+    padding: 2%;
+}
+
+.donate_user_profile_pic{
+
+}
+
+.donate_user_profile_pic img{
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    /*max-height: 100%;*/
+    max-width: 13%;
+    border-radius: 100px;
+}
+.donate_amount_table_div{
+    /*border: 33px solid gray;*/
+    /*padding: 0px 25%;*/
+}
+.donate_amount_table{
+    /*border: 33px solid gray;*/
+    /*padding: 33px;*/
+}
+
+
+ /************************
+        end donate
+ *************************/
+
+/*************************
+        begin settings
+ *************************/
+
+
+.settings_content{
+    background-color: yellow;
+    padding: 2%;
+}
+
+.settings_user_profile_pic img{
+    padding: 0;
+    display: inline;
+    margin: 0 auto;
+    /*max-height: 100%;*/
+    max-width: 13%;
+    border-radius: 100px;
+}
+
+.settings_user_details form input{
+    display: inline-block;;
+}
+
+
+ /************************
+        end settings
+ *************************/
+
+
+  /************************
+        begin enter
+ *************************/
+
+ .enter_devider img{
+    /*background-color: red;*/
+    /*height: 33%;*/
+    /*padding: 0;*/
+    display: block;
+    /*margin: 0 auto;*/
+    /*max-height: 50%;*/
+    max-width: 104px;
+    /*border-radius: 100px;*/
+ }
+
+
+
+/************************
+        end enter
+ *************************/
+
+
+
+  /************************
+        begin logout
+ *************************/
+
+
+.logout_content{
+    background-image: url('http://afterschool.my/as/wp-content/uploads/2016/02/Lim-Kok-Wing.jpg');
+    padding: 2%;
+    /*background-color: red;*/
+    /*position: fixed;*/
+}
+
+/************************
+        end logout
+ *************************/
+
+
+
+ /***********************************
+        begin delete_account
+ ************************************/
+
+
+.delete_account_content{
+    background-color: green;
+    padding: 1%;
+}
+
+.delete_account_button{
+    background-color: red;
+    /*overflow:auto;*/
+    border-radius: 100%;
+    /*width: 33px;*/
+    padding: 17%;
+}
+
+ /************************
+        end begin delete_account
+ *************************/
+
+
+
+
+
+
+

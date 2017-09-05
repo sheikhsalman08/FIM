@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FIM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> <!-- https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css -->   <!-- without this "hidden-xs-down" not working -->
+
+     <!-- <link rel="stylesheet" href="addition/bootstrap.css">   -->  <!-- downloaded from https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css -->    <!-- without this menu dropdown was not working previously given bootstrap official v4 downloaded file not working -->
+    <link href="style.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+      <div class="container body">     
+          <div class="row header">    <!-- begin header -->
+                  <div class="col-sm-3 col-4 logo_section">
+                      <img id="logo" src="addition/images/logo1.jpg"/>
+                  </div>
+                  <div class="col-sm-6 col-6 text-right search_form">
+                      <input class= "form-control input-lg"type="search_form"/>
+                      <input type="submit" value="search"/>
+                  </div>
+                  <div class="col-sm-3 col-2 text-center profile_menu">
+                         <div class="dropdown">
+                             <button class="btn btn-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Menu
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="about-us">
+                                  <a class="dropdown-item" href="index.html">Home</a>
+                                  <a class="dropdown-item" href="blog.html">Blog</a>
+                                  <a class="dropdown-item" href="user.html">User</a>
+                                  <a class="dropdown-item" href="settings.html">Settings</a>
+                                  <a class="dropdown-item" href="donate.html">Donate</a>
+                                  <a class="dropdown-item" href="logout.html">Log Out</a>
+                                  <a class="dropdown-item" href="enter.html">Log In</a>
+                              </div>
+                        </div>
+                  </div>
+          </div>    <!-- end header -->
+          <div class="row logout_content text-center">    <!-- begin logout_content -->
+                  <div class="col-12 text-center ">
+                        <h1>You Are Logged Out Successfully</h1>
+                  </div>
+                  
+          </div>    <!-- end logout_content -->
+      </div>    <!-- end body -->
+  </body>
+  <script src="addition/jquery-3.2.1.min.js"></script>
+  <script src="addition/bootstrap.js"></script>  <!-- Downloaded from https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js -->
+ 
+</html>
+

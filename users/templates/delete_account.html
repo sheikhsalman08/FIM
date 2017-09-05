@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+  {% block content %}
+  {{ title }}
+  {{ user.firstname }}
+          <div class="row delete_account_content text-center">    <!-- delete_account_content -->
+                  <div class="col-12 text-center delete_account_head_text">
+                        <h3>Once you delete your account, there is no going back. Please be certain.</h3>
+                  </div>
+                  <div class="col-3">
+                        <!-- <p class="delete_account_button">Delete Account</p> -->
+                  </div>
+                  <div class="col-6">
+                        <!-- <h3 class="delete_account_button">Delete Account</h3> -->
+                        <!-- action={% url 'home' %} -->
+                        <form method="post">
+                        {% csrf_token %}
+                        <button class="delete_account_button" name="delete_account" value="delete" >Delete Account</button>
+                  </div>
+                  <div class="col-3">
+                  <!--       <p class="delete_account_button">Delete Account</p> -->
+                  </div>
+                  <div class="col-3">
+
+                  </div>
+    {{pot}}                
+    {{request.user.id}}
+    {{request.user.is_active}}
+          </div>    <!-- end delete_account_content -->
+{% endblock %}
+  

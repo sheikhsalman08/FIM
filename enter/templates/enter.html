@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+  {% block content %}
+  {{ title }}
+  {{ user.firstname }}
+  <!-- {{ re }} -->
+          <div class="row mt-2 settings_content">    <!-- begin content -->
+                  <div class="col-12 text-center">
+                        <h1>Enter</h1>
+                        <h1>{{title}}</h1>
+                        
+                  </div>
+                  <div class="col-sm-5 col-12 text-center enter_log_in">
+                      <h3>sign-up</h3>
+                      <form method="post">
+                          {% csrf_token %}
+                          {{registrationForm.as_p}}
+                      <button type="submit"  name="sign-up">Enter</button>
+                      </form>
+                       <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
+                       <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+                  </div>
+                  <div class="col-sm-2 hidden-xs-down enter_devider text-center">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/OCR-A_char_Long_Vertical_Mark.svg" />
+                  </div>
+                  <div class="col-sm-5 col-12 text-center enter_log_in">
+                      <h3>login</h3>
+                      <!-- <input type="name"/><br>
+                      <input type="name"/><br>
+                      <input type="submit"/> -->
+                      <form method="post"">
+                      {% csrf_token %}
+                      {{loginForm.as_p}}
+                      <button type="submit" name="log-in">Enter</button>
+                      </form>
+                  </div>
+          </div>    <!-- end content -->
+  {% endblock %}
+  
