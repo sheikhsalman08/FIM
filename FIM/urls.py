@@ -19,21 +19,24 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import logout
+from django.contrib.auth.decorators import login_required
 
-from enter.views import enter,logInRegisterUser,home
-from users.views import delete_account,update_settings, update_password
-from post.views import main_page
+from enter.views import enter,logInRegisterUser
+from users.views import delete_account,update_settings, update_password,User_profile
+from post.views import main_page,SinglePost
 # from users.views import user_profile
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^home/$', home, name="home"),
     url(r'^enter/$', logInRegisterUser, name="enter"),
     url(r'^logout/$',logout,{'next_page':'enter'}, name='logout'),
     url(r'^byeforever/$',delete_account, name='byeforever'),
     url(r'^settings/$',update_settings, name='settings'),
     url(r'^settings/update_password$',update_password, name='update_password'),
-    url(r'^$',main_page,name="index_page"),
+    url(r'^$',main_page,name="home"),
+    url(r'^post/(?P<pk>[-\w]+)/$', login_required(SinglePost.as_view()), name= 'single_post'),
+    url(r'^user/(?P<pk>[-\w]+)/$', login_required(User_profile.as_view()), name= 'user_profile'),
+
 
     # url(r'^settingss/$', settingss, name='settings'),
     # url(r'^settingss/password/$', password, name='password'),

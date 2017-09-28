@@ -28,6 +28,7 @@ def logInRegisterUser(request):
 		# if not user or not user.check_password(password):
 		# 	raise validation error
 		login(request, user)
+		return redirect('/')
 		# print(request.user.is_authenticated())
 	
 	###################registration###################
@@ -37,10 +38,8 @@ def logInRegisterUser(request):
 		password2 = registrationForm.cleaned_data.get('password')
 		user2.set_password(password2)
 		user2.save()
-		print('sign-up')
 		new_user = authenticate(username = user2.username, password = password2)
 		login(request, new_user)
-	print('konotai na')
 	###################errors###################
 	
 	###################errors###################
@@ -55,11 +54,6 @@ def logInRegisterUser(request):
 	###################return###################
 	return render(request,"enter.html",context)
 
-
-
-# @login_required
-def home(request):
-	return render(request,"enter.html")
 
 def is_auth(request):
 	if request.user.is_authenticated:

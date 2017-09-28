@@ -15,7 +15,7 @@
       <div class="container body">     
           <div class="row header">    <!-- begin header -->
                   <div class="col-sm-3 col-4 logo_section">
-                      <img id="logo" src="{% static 'addition/images/logo1.jpg' %}"/>
+                      <a href="/"><img id="logo" src="{% static 'addition/images/logo1.jpg' %}"/></a>
                   </div>
                   <div class="col-sm-4 col-4 text-right search_form">
                       <input class= "form-control input-lg"type="search_form"/>
@@ -23,8 +23,11 @@
                   </div>
                   <div class="col-sm-2 col-2 text-center">
                     {% if request.user.is_authenticated %}
-                        Welcome {{ request.user.first_name }}
-                        {{ request.user.last_name }}
+                        Welcome 
+                        <a href="/user/{{ request.user.id }}">
+                            {{ request.user.first_name }}
+                            {{ request.user.last_name }}
+                        </a>
                         {% else %}
                         <p>Welcome guest</p>
                     {% endif %}
@@ -50,8 +53,11 @@
                                   <!-- <a class="dropdown-item" href=url "donate">Donate</a> -->
 
                                   <a class="dropdown-item" href={%url "settings"%}>Settings</a>
-                                  <a class="dropdown-item" href={%url "logout"%}>Log Out</a>
-                                  <a class="dropdown-item" href={%url "enter"%}>Log In</a>
+                                  {% if request.user.is_authenticated %}
+                                    <a class="dropdown-item" href={%url "logout"%}>Log Out</a>
+                                      {% else %}
+                                    <a class="dropdown-item" href={%url "enter"%}>Log In</a>
+                                  {% endif %}
 
                               </div>
                         </div>

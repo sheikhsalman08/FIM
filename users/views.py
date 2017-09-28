@@ -14,10 +14,12 @@ from django.contrib.auth.models import User
 from social_django.models import UserSocialAuth
 
 from social_core.pipeline.user import USER_FIELDS, get_username as social_get_username, create_user, user_details
-
-
-
 from random import randrange
+import datetime
+
+from post.models import Post,Post_like,Post_comments
+from django.views.generic import DetailView
+from post.forms import InsertPost
 
 # Create your views here.
 
@@ -98,7 +100,7 @@ def update_settings(request):
 
 	###############################
 
-	puthere = 'agei nai kicu';
+	puthere = '-';
 	if request.method == 'GET' and 'value' in request.method:
 		puthere = request.GET['value']
 		print(request.GET['value'])
@@ -143,6 +145,134 @@ def update_password(request):
     	'form':form,
     }
     return render(request, 'password.html', context)
+
+class User_profile(DetailView):
+	model = User
+	template_name = "user.html"
+	
+	def post(self,request,*args,**kwargs):
+		post = Post()
+		post_like = Post_like()
+		self.object = self.get_object()
+		form = InsertPost(self.request.POST or None, self.request.FILES or None)
+		context = context = super(User_profile, self).get_context_data(**kwargs)
+		if request.method == 'POST' and 'insert_post' in request.POST:
+
+			if form.is_valid():
+				self.object = self.get_object()
+				context = context = super(User_profile, self).get_context_data(**kwargs)
+				post.text = form.cleaned_data['text']
+				post.image = form.cleaned_data['image']
+				post.type="post"
+				post.time = datetime.datetime.now()
+				post.by_id = self.request.user
+				post.save()
+
+				profile_user_id = self.kwargs['pk']
+				
+				context['form']=InsertPost 
+
+				user_post = Post.objects.filter(by_id_id = profile_user_id)
+				context['user_post']=user_post			
+
+			else:
+				self.object = self.get_object()
+				context = context = super(User_profile, self).get_context_data(**kwargs)
+				form = InsertPost
+
+				profile_user_id = self.kwargs['pk']
+
+				context['form']=form 
+
+				user_post = Post.objects.filter(by_id_id = profile_user_id)
+				context['user_post']=user_post			
+
+		elif request.method == 'POST' and 'delete_post' in request.POST:
+				self.object = self.get_object()
+				context = context = super(User_profile, self).get_context_data(**kwargs)
+				form = InsertPost
+				ThisPostId = request.POST['delete_post']
+				ThisPost = Post.objects.filter(id=ThisPostId)
+				ThisPost.delete()
+				context['form']=form 
+
+				profile_user_id = self.kwargs['pk']
+				user_post = Post.objects.filter(by_id_id = profile_user_id)
+				context['user_post']=user_post			
+
+				return self.render_to_response(context=context)
+		elif request.method == 'POST' and 'submit_comment' in request.POST:
+			post_comments.value = request.POST['comment']
+			post_comments.time = datetime.datetime.now()
+			post_comments.visibility_by_admin = 1
+			post_comments.by_id =  request.user
+			post_comments.of_post_id = post.objects.get(id=request.POST['post_id'])
+			post_comments.save()
+
+
+
+		elif request.method == 'POST' and 'up' in request.POST:		#clicked up
+			form = InsertPost
+			post_like.value = 1
+			post_like.time = datetime.datetime.now()
+			post_like.by_id =  request.user
+			post_like.of_post_id = Post.objects.get(id=request.POST['post_like_id'])
+			history = Post_like.objects.filter(by_id = post_like.by_id , of_post_id = post_like.of_post_id)
+
+			if history:		# have history
+				history_object = Post_like.objects.get(by_id = post_like.by_id , of_post_id = post_like.of_post_id)
+				current_value = history_object.value
+
+				if current_value == True:		#current value up
+					history_object.delete()	
+
+				elif current_value == False:	#current value down
+					history_object.value = 1
+					history_object.save()		# update to up
+
+			else:			# don't have history  
+				post_like.save()	# insert up
+
+
+		elif request.method == 'POST' and 'down' in request.POST:		#clicked down
+			form = InsertPost
+			post_like.value = 0
+			post_like.time = datetime.datetime.now()
+			post_like.by_id =  request.user
+			post_like.of_post_id = Post.objects.get(id=request.POST['post_like_id'])
+			history = Post_like.objects.filter(by_id = post_like.by_id , of_post_id = post_like.of_post_id)
+
+			if history:		# have history
+				history_object = Post_like.objects.get(by_id = post_like.by_id , of_post_id = post_like.of_post_id)
+				current_value = history_object.value
+
+				if current_value == False:		#current value down
+					history_object.delete()	
+
+				elif current_value == True:	#current value up
+					history_object.value = 0
+					history_object.save()		# downgrade to down
+
+			else:			# don't have history  
+				post_like.save()	# insert up
+		return self.render_to_response(context=context)
+
+
+
+	def get_context_data(self, **kwargs):
+		context = super(User_profile, self).get_context_data(**kwargs)
+		profile_user_id = self.kwargs['pk']
+		user_post = Post.objects.filter(by_id_id = profile_user_id)
+		form = InsertPost(self.request.POST or None, self.request.FILES or None)
+		profile_user_id = self.kwargs['pk']
+		ThisUser= User.objects.filter(id = profile_user_id)
+		context = {
+			'user_post': user_post,
+			'form':form,
+			'ThisUser': ThisUser
+		}
+		return context
+
 
 def get_username(strategy, details, user=None, *args, **kwargs):		###to social auth user
     result = social_get_username(strategy, details, user=user, *args, **kwargs)
