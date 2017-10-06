@@ -155,7 +155,7 @@ class User_profile(DetailView):
 		post_like = Post_like()
 		self.object = self.get_object()
 		form = InsertPost(self.request.POST or None, self.request.FILES or None)
-		context = context = super(User_profile, self).get_context_data(**kwargs)
+		context = self.get_context_data()
 		if request.method == 'POST' and 'insert_post' in request.POST:
 
 			if form.is_valid():
@@ -224,13 +224,28 @@ class User_profile(DetailView):
 				current_value = history_object.value
 
 				if current_value == True:		#current value up
+					post = Post.objects.get(id=request.POST['post_like_id'])
+					if (post.post_up != 0 or post.post_up > 0 ):
+						post.post_up = post.post_up - 1					
+						post.save()
+
 					history_object.delete()	
 
 				elif current_value == False:	#current value down
+					post = Post.objects.get(id=request.POST['post_like_id'])
+					post.post_up = post.post_up + 1
+					if (post.post_down != 0 or post.post_down > 0):
+						post.post_down = post.post_down - 1
+					post.save()
+
 					history_object.value = 1
 					history_object.save()		# update to up
 
 			else:			# don't have history  
+				post = Post.objects.get(id=request.POST['post_like_id'])
+				post.post_up = post.post_up + 1
+				post.save()
+				
 				post_like.save()	# insert up
 
 
@@ -247,13 +262,29 @@ class User_profile(DetailView):
 				current_value = history_object.value
 
 				if current_value == False:		#current value down
+
+					post = Post.objects.get(id=request.POST['post_like_id'])
+					if (post.post_down != 0 or post.post_down > 0 ):
+						post.post_down = post.post_down - 1					
+						post.save()
+
 					history_object.delete()	
 
 				elif current_value == True:	#current value up
+					post = Post.objects.get(id=request.POST['post_like_id'])
+					if (post.post_up != 0 or post.post_up > 0):
+						post.post_up = post.post_up - 1
+					post.post_down = post.post_down + 1
+					post.save()
+					
 					history_object.value = 0
 					history_object.save()		# downgrade to down
 
 			else:			# don't have history  
+				post = Post.objects.get(id=request.POST['post_like_id'])
+				post.post_down = post.post_down + 1
+				post.save()
+
 				post_like.save()	# insert up
 		return self.render_to_response(context=context)
 
@@ -266,10 +297,21 @@ class User_profile(DetailView):
 		form = InsertPost(self.request.POST or None, self.request.FILES or None)
 		profile_user_id = self.kwargs['pk']
 		ThisUser= User.objects.filter(id = profile_user_id)
+		ThisUser.id = User.objects.get(id = profile_user_id) #can't use without .id at the end as it's already use as filter now when using wiht get use as a instance of that
+
+		post_like = Post_like.objects.all()
+		ThisUser2 = self.request.user.id
+		ThisUserLike = Post_like.objects.filter(by_id = ThisUser2)
+
 		context = {
 			'user_post': user_post,
 			'form':form,
-			'ThisUser': ThisUser
+			'ThisUser': ThisUser,
+			'ThisUser.id':ThisUser.id,
+
+			'post_like':post_like,
+			'ThisUserLike':ThisUserLike,
+			'null':0,			
 		}
 		return context
 

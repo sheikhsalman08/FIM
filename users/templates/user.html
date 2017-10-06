@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load break %}
 {% block content %}
               <div class="row mt-2 content">    <!-- begin content -->
                     <div class="col-12 conten_uper_part">    <!-- begin content_upper part -->
@@ -23,7 +24,7 @@
                     <div class="col-12 mt-2 content_bottom_part">     <!-- begin content_bottom_part -->
                         <div class="row">   <!-- begin row -->
                                 <div class="col-10 home_main_part">   <!--  begin home_main_part -->
-                                    {%  if request.user.id == ThisUser.id %}
+                                    {%  if request.user.id == ThisUser.id.id %}
                                         <div class="col-md-12 mt-2 post_status">
                                             <h3> upload status </h3>
                                             <form method="post" enctype="multipart/form-data">
@@ -90,8 +91,8 @@
                                                                             <table class="table table-bordered">
                                                                                 <thead>
                                                                                   <tr>
-                                                                                    <td>O likes</td>
-                                                                                    <td>0 Dislikes</td>
+                                                                                    <td>{{ post.post_up }} likes</td>
+                                                                                    <td>{{ post.post_down }} unlikes</td>
                                                                                     <td>0 Comments</td>
                                                                                   </tr>
                                                                                 </thead>
@@ -102,14 +103,65 @@
                                                                                 <div class="col-1 post_comment">
                                                                                     <form method="post">
                                                                                     {% csrf_token %}
-                                                                                       <input type="hidden" value="{{ post.id }}" name="post_like_id" />
-                                                                                       <input type="submit" value="up" name="up" class=""/>
+                                                                                        <input type="hidden" value="{{ post.id }}" name="post_like_id" />
+                                                                                        {% if ThisUserLike %}    <!-- 1. if has like/unlike data -->
+                                                                                            {% for ThisUserLike in ThisUserLike %}   
+                                                                                                {% if ThisUserLike.of_post_id_id == post.id %}   <!-- 2. jodi ai post ar kono like/unlike data thake -->
+                                                                                                    {% if ThisUserLike.by_id_id == request.user.id %}   <!-- 3. jodi ai post ar like/unlike ar mdhe logged in user ar kono data thake -->
+                                                                                                          {% if ThisUserLike.value == True %}    <!-- 4. jodi logged in user ar data True hoy -->
+                                                                                                              <input type="submit" value="up" name="up" class="hi" style="background-color : #003366" />
+                                                                                                              {{forloop|break}}
+                                                                                                          {% elif ThisUserLike.value == False %}    <!-- jodi logged in user ar data False hoy -->
+                                                                                                              <input type="submit" value="up" name="up" class="hi" style="background-color :" />
+                                                                                                              {{forloop|break}}
+                                                                                                          {% endif %}   <!-- 4 -->
+                                                                                                    {% endif %}   <!-- 3 -->
+                                                                                                {% else %}     <!-- jodi ai post ar kono like/unlike data na thake -->
+                                                                                                    <!-- ai post ar kono like unlik nai
+                                                                                                    potibar ThisUserLike loop korbe or value dia but 1 bari false dekhabe
+
+                                                                                                    -->
+                                                                                                    {% if forloop.last %}
+                                                                                                        <input type="submit" value="up" name="up" class="hi" style="background-color :" />
+                                                                                                        {{forloop|break}}
+                                                                                                    {% endif %}
+                                                                                                {% endif %}   <!-- 2 -->
+                                                                                            {% endfor %}    
+                                                                                        {% else %}
+                                                                                            <input type="submit" value="up" name="up" class="hi" style="background-color :" />
+                                                                                        {% endif %}   <!-- 1 -->
                                                                                     </form>
 
                                                                                     <form method="post">
                                                                                     {% csrf_token %}
-                                                                                      <input type="hidden" value="{{ post.id }}" name="post_like_id" />
-                                                                                       <input type="submit" value="down" name="down" class="float_left"/><br><br>
+                                                                                        <input type="hidden" value="{{ post.id }}" name="post_like_id" />
+
+                                                                                        {% if ThisUserLike %}    <!-- 1. if has like/unlike data -->
+                                                                                            {% for ThisUserLike in ThisUserLike %}   
+                                                                                                {% if ThisUserLike.of_post_id_id == post.id %}   <!-- 2. jodi ai post ar kono like/unlike data thake -->
+                                                                                                    {% if ThisUserLike.by_id_id == request.user.id %}   <!-- 3. jodi ai post ar like/unlike ar mdhe logged in user ar kono data thake -->
+                                                                                                        {% if ThisUserLike.value == False %}    <!-- 4. jodi logged in user ar data True hoy -->
+                                                                                                            <input type="submit" value="down" name="down" class="float_left" style="background-color : #ff3300; "/><br>
+                                                                                                            {{forloop|break}}
+                                                                                                        {% elif ThisUserLike.value == True %}    <!-- jodi logged in user ar data False hoy -->
+                                                                                                            <input type="submit" value="down" name="down" class="float_left"/><br>
+                                                                                                            {{forloop|break}}
+                                                                                                        {% endif %}   <!-- 4 -->
+                                                                                                    {% endif %}   <!-- 3 -->
+                                                                                                {% else %}     <!-- jodi ai post ar kono like/unlike data na thake -->
+                                                                                                <!-- ai post ar kono like unlik nai
+                                                                                                potibar ThisUserLike loop korbe or value dia but 1 bari false dekhabe
+                                                                                                -->
+                                                                                                  {% if forloop.last %}
+                                                                                                      <input type="submit" value="down" name="down" class="float_left"/><br>
+                                                                                                      {{forloop|break}}
+                                                                                                  {% endif %}
+                                                                                                {% endif %}   <!-- 2 -->
+                                                                                            {% endfor %}    
+                                                                                        {% else %}
+                                                                                            <input type="submit" value="down" name="down" class="float_left"/><br>
+                                                                                        {% endif %}   <!-- 1 -->
+
                                                                                     </form>
 
                                                                                     <form method="post" action="/post/{{ post.id }}/">

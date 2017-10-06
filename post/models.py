@@ -12,10 +12,11 @@ class Post(models.Model):
 	by_id = models.ForeignKey(User, blank = True, null = True, related_name="owner")
 	time = models.DateTimeField(blank = True, null = True)
 	visibility_by_admin =  models.BooleanField(default=True)
+	post_up = models.IntegerField(default=0)
+	post_down = models.IntegerField(default=0)
 
 	def __str__(self):
    			return "{} at {}".format(self.by_id, self.time)
-
 
 
 class Post_comments(models.Model):
