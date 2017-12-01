@@ -3,7 +3,7 @@ Member Forum
 (Django) Forum For Institute Members
 
 # Things Are Covered:
-  * 2 type of user account
+  * 2 types of user account
         * Administrator
         * General Member
   * Post option for Member
