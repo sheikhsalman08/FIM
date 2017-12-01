@@ -90,9 +90,8 @@ def update_settings(request):
 		github_login = user.social_auth.get(provider='github')
 	except UserSocialAuth.DoesNotExist:
 		github_login = None
-
-   	try:
-		facebook_login = user.social_auth.get(provider='facebook')
+	try:
+	    facebook_login = user.social_auth.get(provider='facebook')
 	except UserSocialAuth.DoesNotExist:
 		facebook_login = None
 

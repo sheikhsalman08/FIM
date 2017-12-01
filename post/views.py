@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+	# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 import datetime
@@ -260,6 +260,11 @@ class SinglePost(DetailView):
 		for LikeByRequestedUser in LikeByRequestedUser:
 			LikeByRequestedUser = LikeByRequestedUser.value
 		ThisPostComments = Post_comments.objects.filter(of_post_id = ThisPostId)
+		ThisPostCommentsNumber = 0
+		for obj in ThisPostComments:
+			# ThisPostCommentsNumber = ThisPostCommentsNumber + 1 ;
+			# obj+ = 1
+			ThisPostCommentsNumber += 1 ;
 
 		#update like/unlike
 		
@@ -274,7 +279,8 @@ class SinglePost(DetailView):
 			'ThisPostComments': ThisPostComments,
 			'ThisPostTotalUp': ThisPostTotalUp,
 			'ThisPostTotalDown': ThisPostTotalDown,
-			'LikeByRequestedUser': LikeByRequestedUser
+			'LikeByRequestedUser': LikeByRequestedUser,
+			'ThisPostCommentsNumber':ThisPostCommentsNumber,
 
 		}
 		return context

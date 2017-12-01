@@ -5,10 +5,10 @@ class InsertPost(forms.Form):
 			widget = forms.Textarea,
 		)
 	# image = forms.FileField(
-	# 		# widget = forms.ClearableFileInput,
+	# 		# widget = forms.ClearableFileInput(attrs={'multiple': True}),
 	# 	)
+	# or
 	image = forms.FileField(
-			# widget=forms.ClearableFileInput(attrs={'multiple': True}),
 			widget=forms.FileInput(),
 			required = False,
 		)

@@ -24,7 +24,7 @@ SECRET_KEY = '0$+_zmjk_!*1o2-9yltxfb6%w%hmlw$yy)vf1ks=*dvqf$=ql('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'post',
     'blog',
+    'donation'
 
 ]
 
@@ -125,6 +126,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -163,6 +165,8 @@ SOCIAL_AUTH_GITHUB_SECRET = '809716d82d28bae757465927b7564b60c2463609'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '164854094090973'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'c47e3ab98e8b300ba39223e202a26c67'  # App Secret
+
+
 
 
 
