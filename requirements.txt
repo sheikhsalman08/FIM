@@ -13,7 +13,7 @@ django-filter==1.0.4
 django-geoposition==0.3.0
 django-markdown-deux==1.0.5
 django-paypal==0.4.1
-djangorestframework==3.6.3
+djangorestframework==3.11.2
 djangotoolbox==1.8.0
 idna==2.6
 Markdown==2.6.9
