@@ -23,7 +23,7 @@ mongodbforms==0.3
 mongoengine==0.13.0
 oauthlib==2.0.2
 pbr==3.1.1
-PyJWT==1.5.2
+PyJWT==2.4.0
 pymongo==2.8.1
 PyMySQL==0.7.11
 python-openid==2.2.5
